@@ -20,7 +20,6 @@ public class Parsing {
     public String pars() throws IOException, InterruptedException {
 
         String json = makeHttp();
-        System.out.println("Полученный JSON: " + json);
         JsonObject root = JsonParser.parseString(json).getAsJsonObject();
         JsonObject query = root.getAsJsonObject("query");
         JsonObject searchInfo = query.getAsJsonObject("searchinfo");
