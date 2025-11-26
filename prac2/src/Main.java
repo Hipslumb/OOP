@@ -1,28 +1,41 @@
+import org.xml.sax.SAXException;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.util.Scanner;
+import java.io.IOException;
+import java.util.Map;
 
 public class Main {
-    public static void main(String[] a) {
+    public static void main(String[] a) throws IOException, ParserConfigurationException, SAXException {
         while (true) {
+            try {
+                TimeTracker timer = new TimeTracker();
 
-            System.out.println("Enter the path to the file (click on enter to exit)");
+                FileInputReader input = new FileInputReader();
+                File file = input.input();
+                timer.startAll();
+                if (file != null) {
+                    FileReader reader = new FileReader(file);
+                    Map<String, Object> map = reader.parseFile();
+                    timer.endParse();
 
-            Scanner read = new Scanner(System.in);
-            String name;
-            name = read.nextLine();
-            if (name.isEmpty()) {
-                System.out.println("Exit...");
-                return;
+                    DuplicateTracker duplicateTracker = new DuplicateTracker(map);
+                    duplicateTracker.printDuplicates();
+                    timer.endDuplicates();
+
+                    FloorStatistic statistic = new FloorStatistic(map);
+                    statistic.printFloor();
+                    timer.endFloors();
+
+                    timer.endAll();
+                    timer.printTime();
+                }
+            } catch (IOException e) {
+                System.out.println("File error: " + e.getMessage());
+            } catch (ParserConfigurationException e) {
+                System.out.println("XML parser error: " + e.getMessage());
+            } catch (SAXException e) {
+                System.out.println("XML format error: " + e.getMessage());
             }
-
-            String dir = "C:\\JavaProjects\\OOP\\prac2\\";
-            File file = new File(dir + name);
-            if (file.exists()) {
-                System.out.println("File path to processing: " + name);
-                break;
-            }
-            else
-                System.out.println("File not found! Try again ");
         }
     }
 }
