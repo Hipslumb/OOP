@@ -35,19 +35,18 @@ public class CSVparser {
             if (line.isEmpty()) continue;
 
             Map<String, Object> row = new HashMap<>();
-            StringBuilder signature = new StringBuilder();
+            StringBuilder rowSignature= new StringBuilder();
 
 
             for (int j = 0; j < heads.length; j++){
                 String value = values[j].trim().replace("\"", "");
                 row.put(heads[j],value);
-                signature.append(value);
+                rowSignature.append(value);
             }
 
-            String rowSignature = signature.toString();
-            rows.put(rowSignature,row);
-            int curCount = count.getOrDefault(rowSignature, 0);
-            count.put(rowSignature, curCount + 1);
+            rows.put(rowSignature.toString(),row);
+            int curCount = count.getOrDefault(rowSignature.toString(), 0);
+            count.put(rowSignature.toString(), curCount + 1);
 
             processor.collectFloor(row, floorStats);
         }

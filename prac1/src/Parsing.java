@@ -36,8 +36,8 @@ public class Parsing {
             System.out.println((i+1)+". "+title+" (ID: "+pageid+")");
             if (result.has("snippet")) {
                 String snippet = result.get("snippet").getAsString()
-                        .replaceAll("<[^>]+>", "") // убираем HTML теги
-                        .replaceAll("&[^;]+;", ""); // убираем HTML entities
+                        .replaceAll("<[^>]+>", "")
+                        .replaceAll("&[^;]+;", "");
                 System.out.println("   " + snippet.substring(0, Math.min(snippet.length(), 300)) + "...");
             }
             System.out.println();

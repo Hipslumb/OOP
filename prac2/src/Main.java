@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] a) throws IOException, ParserConfigurationException, SAXException {
+    public static void main(String[] a) {
         while (true) {
             try {
                 TimeTracker timer = new TimeTracker();

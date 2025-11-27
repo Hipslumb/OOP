@@ -56,10 +56,7 @@ public class XMLparser {
         row.put("house", house);
         row.put("floor", floor);
 
-        StringBuilder signature = new StringBuilder();
-        signature.append(city).append(street).append(house).append(floor);
-        String rowSignature = signature.toString();
-        return rowSignature;
+        return city + street + house + floor;
     }
 
 }
