@@ -28,5 +28,5 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-/address.xml
-address.csv/
+address.xml
+address.csv
